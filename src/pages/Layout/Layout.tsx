@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import cls from './Layout.module.scss';
+import cls from './Layout.module.css';
 
 export const Layout = () => {
   return (
