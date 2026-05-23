@@ -1,0 +1,20 @@
+.container {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chipContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

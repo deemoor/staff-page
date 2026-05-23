@@ -1,0 +1,31 @@
+.paper {
+  width: 400px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.drawerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .paper {
+    width: 100%;
+  }
+}

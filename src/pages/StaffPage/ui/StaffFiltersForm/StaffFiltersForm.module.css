@@ -1,0 +1,11 @@
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}

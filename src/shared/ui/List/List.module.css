@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 2;
+}
+
+.tableHead {
+  background-color: #f5f5f5;
+}
+
+.emptyCell {
+  padding: 24px 0;
+  color: var(--mui-palette-text-secondary, #666);
+}
