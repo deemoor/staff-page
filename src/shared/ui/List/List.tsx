@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type Dispatch, type FC, type MouseEvent, type SetStateAction } from 'react';
+import { type ChangeEvent } from 'react';
 import { 
   Table, 
   TableBody, 
@@ -12,19 +12,16 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
-import { DEFAULT_PAGE, DEFAULT_PERPAGE, PERPAGE_OPTIONS, type Column, type ListFilters, type ListParams, type QueryParams, type SortOrder } from 'src/config';
+import type { Column, Filters, WithId } from 'src/shared/types';
+import { DEFAULT_PAGE, DEFAULT_PERPAGE, PERPAGE_OPTIONS } from 'src/shared/config';
 import cls from './List.module.css';
-
-interface WithId {
-  id: string | number;
-}
 
 type Props<T> = {
   items: T[];
   total: number;
   columns: Column[];
-  filters: ListFilters;
-  setFilters: Dispatch<SetStateAction<ListFilters>>
+  filters: Filters;
+  updateFilters: (newFilters: Partial<Filters>) => void;
   isLoading: boolean;
 }
 
@@ -33,20 +30,11 @@ export const List = <T extends WithId>({
   total,
   columns, 
   filters, 
-  setFilters, 
+  updateFilters, 
   isLoading
 }: Props<T>) => {
-
-  const updateFilters = (newFilters: ListFilters) => {
-    setFilters((old: ListFilters) => ({
-      ...old,
-      ...newFilters
-    }));
-  }
-
   const handleChangePage = (newPage: number) => {
-    const newFilters = { page: newPage };
-    updateFilters(newFilters);
+    updateFilters({ page: newPage });
   };
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,7 +46,7 @@ export const List = <T extends WithId>({
   };
 
   const handleSort = (columnId: string) => {
-    const newFilters: ListFilters = { 
+    const newFilters: Filters = { 
       page: 0,
       sortBy: columnId,
       sortOrder: 'asc',
@@ -77,21 +65,15 @@ export const List = <T extends WithId>({
   };
 
   return (
-    <TableContainer component={Paper} sx={{ boxShadow: 3, position: 'relative' }}>
+    <TableContainer component={Paper} className={cls.container}>
       {isLoading && (
-        <Box sx={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          display: 'flex', justifyContent: 'center', alignItems: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-          zIndex: 2
-        }}>
+        <Box className={cls.loaderOverlay}>
           <CircularProgress />
         </Box>
       )}
 
       <Table aria-label="staff-table">
-        <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
+        <TableHead className={cls.tableHead}>
           <TableRow>
             {columns.map((column: Column) => {
               const cellStyles = {
@@ -103,7 +85,7 @@ export const List = <T extends WithId>({
               return (
                 <TableCell
                   key={column.id} 
-                  sx={cellStyles}
+                  style={cellStyles}
                 >
                   {column.sortable ? (
                     <TableSortLabel
@@ -125,14 +107,20 @@ export const List = <T extends WithId>({
           {items.map((item) => (
             <TableRow key={String(item.id)} hover>
               {columns.map((column) => (
-                <TableCell key={column.id}>{item[column.id]}</TableCell>
+                <TableCell key={column.id}>
+                  {String(item[column.id as keyof T] ?? '')}
+                </TableCell>
               ))}
             </TableRow>
           ))}
           
           {!isLoading && items.length === 0 && (
             <TableRow>
-              <TableCell colSpan={5} align="center" sx={{ py: 3, color: 'text.secondary' }}>
+              <TableCell 
+                colSpan={columns.length} 
+                align="center" 
+                className={cls.emptyCell}
+              >
                 Нет сотрудников с выбранными фильтрами
               </TableCell>
             </TableRow>

@@ -1,8 +1,10 @@
-import type { ListData, ListFilters, ListParams, QueryResponse, StaffMember } from "src/config";
-import axios from "src/config/mockApi";
+import type { Filters, ListData } from "src/shared/types";
+import type { StaffMember } from "./types";
+import axios from "./mockApi";
+
 
 export const fetchStaffApi = async (
-  filters: ListFilters, 
+  filters: Filters, 
 ): Promise<ListData<StaffMember> | null> => {
   try {
     const response = await axios.get('/api/staff', {

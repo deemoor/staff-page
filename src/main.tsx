@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
-import App from './App.tsx'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { theme } from './config'
+import { theme } from 'src/shared/config'
+import App from './App.tsx'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(

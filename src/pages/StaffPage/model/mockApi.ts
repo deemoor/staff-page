@@ -1,10 +1,13 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { DEFAULT_PAGE, DEFAULT_PERPAGE } from 'src/shared/config';
+import type { Filters } from 'src/shared/types';
+import type { StaffMember } from './types';
 import { MOCK_STAFF } from './mockData';
-import type { ListFilters } from './types';
-import { DEFAULT_PAGE, DEFAULT_PERPAGE } from './constants';
 
 const mock = new MockAdapter(axios, { delayResponse: 500 });
+
+const getStaffValue = (item: StaffMember, key: string) => item[key as keyof StaffMember];
 
 mock.onGet('/api/staff').reply((config) => {
   const { 
@@ -14,15 +17,23 @@ mock.onGet('/api/staff').reply((config) => {
     sortOrder = undefined,
     search = '',
     fields = {}
-  }: ListFilters = config.params || {};
+  }: Filters = config.params || {};
 
   let filteredData = [...MOCK_STAFF];
 
   if (fields && Object.keys(fields).length > 0) {
     filteredData = filteredData.filter(item => 
-      Object.entries(fields).every(([key, value]) => 
-        !value || String(item[key]) === String(value)
-      )
+      Object.entries(fields).every(([key, value]) => {
+        if (!value || (Array.isArray(value) && value.length === 0)) return true;
+        
+        const itemValue = String(getStaffValue(item, key));
+        
+        if (Array.isArray(value)) {
+          return value.map(String).includes(itemValue);
+        }
+
+        return itemValue === String(value);
+      })
     );
   }
 
@@ -39,8 +50,8 @@ mock.onGet('/api/staff').reply((config) => {
 
   if (sortBy && sortOrder) {
     filteredData.sort((a, b) => {
-      const valueA = String(a[sortBy] || '').toLowerCase();
-      const valueB = String(b[sortBy] || '').toLowerCase();
+      const valueA = String(getStaffValue(a, sortBy) || '').toLowerCase();
+      const valueB = String(getStaffValue(b, sortBy) || '').toLowerCase();
      
       if (sortOrder === 'asc') {
         return valueA.localeCompare(valueB);
