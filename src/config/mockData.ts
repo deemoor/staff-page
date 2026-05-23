@@ -1,4 +1,5 @@
-import { StaffRole, type StaffMember } from "./types";
+import { StaffRole } from "./constants";
+import { type StaffMember } from "./types";
 
 export const MOCK_STAFF: StaffMember[] = [
   { id: 1, name: "Иван Иванов", email: "ivan.ivanov@company.com", role: StaffRole.EngineeringManager, department: "Engineering" },

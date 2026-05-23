@@ -1,2 +1,2 @@
-export { Layout } from './Layout/Layout';
-export { StaffPage } from './StaffPage/StaffPage';
+export { Layout } from './Layout';
+export { StaffPage } from './StaffPage';
