@@ -20,7 +20,7 @@ export const StaffPage = () => {
 
   return (
     <div className={cls.content}>
-      <Typography variant="h1" className={cls.title}>Сотрудники компании</Typography>
+      <Typography variant="h1" className={cls.title}>Company Staff</Typography>
       
       <ListFilters
         columns={columns}

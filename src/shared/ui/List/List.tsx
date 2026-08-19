@@ -121,7 +121,7 @@ export const List = <T extends WithId>({
                 align="center" 
                 className={cls.emptyCell}
               >
-                Нет сотрудников с выбранными фильтрами
+                No employees match the selected filters
               </TableCell>
             </TableRow>
           )}
@@ -136,8 +136,8 @@ export const List = <T extends WithId>({
         page={filters.page || DEFAULT_PAGE}
         onPageChange={(_, newPage) => handleChangePage(newPage)}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="Строк на странице:"
-        labelDisplayedRows={({ from, to, count }) => `${from}–${to} из ${count}`}
+        labelRowsPerPage="Rows per page:"
+        labelDisplayedRows={({ from, to, count }) => `${from}–${to} of ${count}`}
       />
     </TableContainer>
   );

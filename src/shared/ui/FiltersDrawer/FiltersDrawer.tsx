@@ -49,7 +49,7 @@ export const FiltersDrawer: FC<Props> = ({ filters, updateFilters, isDrawerOpen,
     >
       <div className={cls.drawerHeader}>
         <Typography variant="h2">
-          Фильтры
+          Filters
         </Typography>
         
         <div className={cls.drawerActions}>
@@ -58,14 +58,14 @@ export const FiltersDrawer: FC<Props> = ({ filters, updateFilters, isDrawerOpen,
             color="inherit" 
             onClick={() => setIsDrawerOpen(false)}
           >
-            Отмена
+            Cancel
           </Button>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="primary"
             onClick={handleSave}
           >
-            Сохранить
+            Save
           </Button>
         </div>
       </div>

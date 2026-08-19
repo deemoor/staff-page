@@ -47,19 +47,19 @@ export const StaffFiltersForm: FC<FiltersFormProps> = ({
       <TextField
         fullWidth
         size="small"
-        label="Поиск"
+        label="Search"
         value={draftSearch}
         onChange={(e) => setDraftSearch(e.target.value)}
       />
 
       <FormControl fullWidth size="small">
-        <InputLabel id="role-label">Роль</InputLabel>
+        <InputLabel id="role-label">Role</InputLabel>
         <Select
           id="role"
           labelId="role-label"
           multiple
           value={selectedRoles}
-          label="Роль"
+          label="Role"
           onChange={(e) => handleChangeSelected(e, 'role')}
           renderValue={(selected) => (
             <div className={cls.chipsContainer}>
@@ -76,13 +76,13 @@ export const StaffFiltersForm: FC<FiltersFormProps> = ({
       </FormControl>
       
       <FormControl fullWidth size="small">
-        <InputLabel id="department-label">Отдел</InputLabel>
+        <InputLabel id="department-label">Department</InputLabel>
         <Select
           id="department"
           labelId="department-label"
           multiple
           value={selectedDepartments}
-          label="Отдел"
+          label="Department"
           onChange={(e) => handleChangeSelected(e, 'department')}
           renderValue={(selected) => (
             <div className={cls.chipsContainer}>

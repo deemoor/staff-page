@@ -45,7 +45,7 @@ export const ListFilters: FC<Props> = ({ columns, filters, updateFilters, setIsD
         {filters.search &&
           <Chip
             key={'search'}
-            label={`Поиск: ${filters.search}`} 
+            label={`Search: ${filters.search}`}
             onDelete={handleRemoveSearch}
             color="primary"
             variant="outlined"
@@ -68,7 +68,7 @@ export const ListFilters: FC<Props> = ({ columns, filters, updateFilters, setIsD
           startIcon={<FilterListIcon />}
           onClick={() => setIsDrawerOpen(true)}
           >
-          Фильтры
+          Filters
         </Button>
         {(hasFields || filters.search) && (
           <Button 
@@ -76,7 +76,7 @@ export const ListFilters: FC<Props> = ({ columns, filters, updateFilters, setIsD
             color="error" 
             onClick={handleResetAll}
           >
-            Сбросить все фильтры
+            Reset all filters
           </Button>
         )}
       </div>
